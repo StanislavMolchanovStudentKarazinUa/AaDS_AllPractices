@@ -21,8 +21,8 @@ void PrintFootbolist(Footbolist* footbolist) {
 void BestForward(Footbolist* footbolist, int n) {
     Footbolist bestForward = footbolist[0];
     for (int i = 0; i < n; i++) {
-        if ((footbolist+i)->goal_count / (footbolist+i)->games_count >
-            (&bestForward)->goal_count / (&bestForward)->games_count) bestForward = footbolist[i];
+        if (1.0f*(footbolist+i)->goal_count / (footbolist+i)->games_count >
+            1.0f*(&bestForward)->goal_count / (&bestForward)->games_count) bestForward = footbolist[i];
     }
     PrintFootbolist(&bestForward);
 }
