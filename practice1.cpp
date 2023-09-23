@@ -148,7 +148,7 @@ void Menu(fstream* FFile, string filename) {
                 Footbolist* footbolist = new Footbolist[n];
                 FillFootbolists(footbolist, n);
                 ExportFootbolists(FFile, filename, footbolist, n);
-                delete(footbolist);
+                delete[] footbolist;
             }
             else if (command == 2) {
                 int i = 0;
@@ -168,7 +168,7 @@ void Menu(fstream* FFile, string filename) {
                     else cout << "Unknown command" << endl;
                     ExportFootbolists(FFile, filename, footbolist, n);
                 }
-                delete(footbolist);
+                delete[] footbolist;
             }
             else cout << "Unknown command" << endl;
         } 
