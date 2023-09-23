@@ -114,8 +114,8 @@ void PrintAll(pnode footbolist) {
 /////////////////////////////////////////////////////////////////////
 
 pnode BestForward(pnode footbolist, pnode bestForward) {
-    if (footbolist->footbolist.goal_count / footbolist->footbolist.games_count >
-       bestForward->footbolist.goal_count / bestForward->footbolist.games_count) 
+    if (1.0f*footbolist->footbolist.goal_count / footbolist->footbolist.games_count >
+       1.0f*bestForward->footbolist.goal_count / bestForward->footbolist.games_count) 
         bestForward = footbolist;
     if (footbolist->next == NULL) return bestForward;
     else return BestForward(footbolist->next, bestForward);
