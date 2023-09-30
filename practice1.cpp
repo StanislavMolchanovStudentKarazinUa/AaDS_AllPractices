@@ -81,7 +81,11 @@ bool SameFootbolist(Footbolist footbolist1, Footbolist footbolist2) {
         (&footbolist1)->goal_count == (&footbolist2)->goal_count;
 }
 int FindFootbolist(Footbolist* footbolist, int n, Footbolist footbolist0) {
-    for (int i = 0; i < n; i++) if (SameFootbolist(footbolist[i], footbolist0)) return i;
+    for (int i = 0; i < n; i++){
+        if (SameFootbolist(footbolist[i], footbolist0)){
+            return i;
+        }
+    }
     return -1;
 }
 Footbolist SetFootbolist() {
