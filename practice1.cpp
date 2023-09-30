@@ -2,19 +2,57 @@
 #include <fstream>
 using namespace std;
 
-
+/////////////////////////////////////////////////////////////////////
+enum Role {
+    Goalkeeper,
+    Defender,
+    Midfielder,
+    Forward
+};
+Role SetRole() {
+    string a = "";
+    while (true) {
+        cout << "Footbolist's role: ";
+        cin >> a;
+        if (a == "Goalkeeper") return Goalkeeper;
+        else if (a == "Defender") return Defender;
+        else if (a == "Midfielder") return Midfielder;
+        else if (a == "Forward") return Forward;
+        else cout << "WRONG!!!\n";
+    }
+}
+Role SetRole(int a) {
+    switch (a) {
+        case 0: return Goalkeeper;
+        case 1: return Defender;
+        case 2: return Midfielder;
+        case 3: return Forward;
+        default:
+            cout << "Error!\n";
+            return Forward;
+    }
+}
+void OutputRole(Role role) {
+    switch (role) {
+    case 0: cout << "Goalkeeper"; break;
+    case 1: cout << "Defender"; break;
+    case 2: cout << "Midfielder"; break;
+    default: cout << "Forward"; break;
+    }
+}
 /////////////////////////////////////////////////////////////////////
 struct Footbolist {
     string surname = "";
-    string role = "";
+    Role role = Forward;
     short age = 0;
     short games_count = 0;
     int goal_count = 0;
 };
 /////////////////////////////////////////////////////////////////////
 void PrintFootbolist(Footbolist* footbolist) {
-    cout << "surname: " << footbolist->surname << " role: " << footbolist->role << 
-        " age: " << footbolist->age << " games count: " << footbolist->games_count << 
+    cout << "surname: " << footbolist->surname << " role: ";
+    OutputRole(footbolist->role);
+    cout << " age: " << footbolist->age << " games count: " << footbolist->games_count << 
         " goal count: " << footbolist->goal_count << endl;
 }
 /////////////////////////////////////////////////////////////////////
@@ -50,8 +88,7 @@ Footbolist SetFootbolist() {
     Footbolist footbolist;
     cout << "Footbolist's surname: ";
     cin >> (&footbolist)->surname;
-    cout << "Footbolist's role: ";
-    cin >> (&footbolist)->role;
+    (&footbolist)->role = SetRole();
     cout << "Footbolist's age: ";
     cin >> (&footbolist)->age;
     cout << "Footbolist's games count: ";
@@ -62,14 +99,16 @@ Footbolist SetFootbolist() {
 }
 /////////////////////////////////////////////////////////////////////
 Footbolist * ImportFootbolists(fstream* FFile, string filename, int * n){
+    int role0;
     Footbolist* footbolist;
     (*FFile).open(filename);
     *FFile >> *n;
     footbolist = new Footbolist[*n];
     for (int i = 0; i < *n; i++) {
-        *FFile >> (footbolist + i)->surname >> (footbolist + i)->role >>
+        *FFile >> (footbolist + i)->surname >> role0 >>
             (footbolist + i)->age >> (footbolist + i)->games_count >> 
             (footbolist + i)->goal_count;
+        (footbolist + i)->role = SetRole(role0);
     }
     (*FFile).close();
     return footbolist;
