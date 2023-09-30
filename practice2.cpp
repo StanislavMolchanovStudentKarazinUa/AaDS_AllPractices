@@ -198,6 +198,10 @@ int main()
                 else cout << "Unknown command" << endl;
             }
             else if (command == 2) {
+                if (footbolist == NULL) {
+                    cout << "n must be bigger than 0" << endl;
+                    continue;
+                }
                 int i = 0;
                 cout << "0 for help" << endl;
                 while (true) {
