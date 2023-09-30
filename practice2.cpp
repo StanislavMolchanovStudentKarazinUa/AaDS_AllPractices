@@ -1,9 +1,47 @@
 #include <iostream>
 using namespace std;
 
+enum Role {
+    Goalkeeper,
+    Defender,
+    Midfielder,
+    Forward
+};
+Role SetRole() {
+    string a = "";
+    while (true) {
+        cout << "Footbolist's role: ";
+        cin >> a;
+        if (a == "Goalkeeper") return Goalkeeper;
+        else if (a == "Defender") return Defender;
+        else if (a == "Midfielder") return Midfielder;
+        else if (a == "Forward") return Forward;
+        else cout << "WRONG!!!\n";
+    }
+}
+Role SetRole(int a) {
+    switch (a) {
+    case 0: return Goalkeeper;
+    case 1: return Defender;
+    case 2: return Midfielder;
+    case 3: return Forward;
+    default:
+        cout << "Error!\n";
+        return Forward;
+    }
+}
+void OutputRole(Role role) {
+    switch (role) {
+    case 0: cout << "Goalkeeper"; break;
+    case 1: cout << "Defender"; break;
+    case 2: cout << "Midfielder"; break;
+    default: cout << "Forward"; break;
+    }
+}
+
 struct Footbolist {
     string surname = "";
-    string role = "";
+    Role role = Forward;
     short age = 0;
     short games_count = 0;
     int goal_count = 0;
@@ -12,8 +50,7 @@ Footbolist SetFootbolist() {
     Footbolist footbolist;
     cout << "\nFootbolist's surname: ";
     cin >> (&footbolist)->surname;
-    cout << "Footbolist's role: ";
-    cin >> (&footbolist)->role;
+    (&footbolist)->role = SetRole();
     cout << "Footbolist's age: ";
     cin >> (&footbolist)->age;
     cout << "Footbolist's games count: ";
@@ -100,8 +137,9 @@ void free(pnode p) {
 
 void PrintFootbolist(pnode footbolist) {
     cout << "surname: " << footbolist->footbolist.surname 
-        << " role: " 
-        << footbolist->footbolist.role << " age: " 
+            << " role: ";
+    OutputRole(footbolist->footbolist.role);
+    cout << " age: "
         << footbolist->footbolist.age << " games count: " 
         << footbolist->footbolist.games_count <<
         " goal count: " << footbolist->footbolist.goal_count << endl;
