@@ -143,11 +143,9 @@ Footbolist* RemoveFootbolist(Footbolist* footbolist, int* n, Footbolist footboli
         else {
             int i;
             Footbolist* newfootbolist = new Footbolist[(*n) - 1];
-            for (i = 0; i < k; i++) {
+            for (i = 0; i < *n; i++) {
+                if (i == k) continue;
                 *(newfootbolist + i) = *(footbolist + i);
-            }
-            for (i = k + 1; i < *n; i++) {
-                *(newfootbolist + i - 1) = *(footbolist + i);
             }
             (*n)--;
             return newfootbolist;
