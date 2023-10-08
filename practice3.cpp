@@ -296,9 +296,9 @@ int main()
                     if (command == 0) cout << "0 - help\n1 - find best forward\n2 - show all less than 5 games footbolist\n3 - remove footbolist\n4 - add footbolist before other\n5 - add footbolist after other\n6 - print all\n7 - go back" << endl;
                     else if (command == 1) PrintFootbolist(BestForward(footbolist, footbolist));
                     else if (command == 2) LessThanFiveGames(footbolist);
-                    else if (command == 3) if (!deleteNode(&footbolist, FindFootbolist(footbolist, SetFootbolist()))) cout << "Error!Requested footbolist can't be found" << endl; else {}
-                    else if (command == 4) if (!insertBefore(&footbolist, FindFootbolist(footbolist, SetFootbolist()), SetOtherFootbolist())) cout << "Error!Requested footbolist can't be found" << endl; else {}
-                    else if (command == 5) if (!insertAfter(&footbolist, FindFootbolist(footbolist, SetFootbolist()), SetOtherFootbolist())) cout << "Error!Requested footbolist can't be found" << endl; else{}
+                    else if (command == 3) if (!deleteNode(&footbolist, FindFootbolist(footbolist, SetFootbolist()))) cout << "Error!Requested footbolist can't be found" << endl; else {cout << "Footbolist was successfully deleted" << endl;}
+                    else if (command == 4) if (!insertBefore(&footbolist, FindFootbolist(footbolist, SetFootbolist()), SetOtherFootbolist())) cout << "Error!Requested footbolist can't be found" << endl; else {cout << "Footbolist was successfully inserted" << endl;}
+                    else if (command == 5) if (!insertAfter(&footbolist, FindFootbolist(footbolist, SetFootbolist()), SetOtherFootbolist())) cout << "Error!Requested footbolist can't be found" << endl; else{cout << "Footbolist was successfully inserted" << endl;}
                     else if (command == 6) PrintAll(footbolist);
                     else if (command == 7) break;
                     else cout << "Unknown command" << endl;
