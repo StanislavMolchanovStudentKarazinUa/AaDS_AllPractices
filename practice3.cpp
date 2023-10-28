@@ -147,7 +147,7 @@ bool deleteNode(pnode * head, pnode p) {
             return true;
         }
         *head = (*head)->next;
-        delete cur->next;
+        delete cur;
         return true;
     }
     while (cur->next != NULL) {
