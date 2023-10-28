@@ -73,21 +73,21 @@ Footbolist SetOtherFootbolist() {
     cin >> (&footbolist)->goal_count;
     return footbolist;
 }
-struct tnode {
+struct t2node {
     Footbolist footbolist;
-    tnode* next = NULL;
+    t2node* next = NULL;
 };
-typedef tnode* pnode;
+typedef t2node* p2node;
 
 /////////////////////////////////////////////////////////////////////
 
-pnode formLIFO_1(int n, pnode head = NULL) {
-    pnode cur = NULL;
+p2node formLIFO_1(int n, p2node head = NULL) {
+    p2node cur = NULL;
     Footbolist footbolist;
     if (n > 0) {
         footbolist = SetFootbolist();
         n--;
-        cur = new tnode;
+        cur = new t2node;
         cur->footbolist = footbolist;
         cur->next = head;
         head = cur;
@@ -95,13 +95,13 @@ pnode formLIFO_1(int n, pnode head = NULL) {
     }
     return head;
 }
-void formLIFO_2(int n, pnode* p, pnode head = NULL) {
-    pnode cur = NULL;
+void formLIFO_2(int n, p2node* p, p2node head = NULL) {
+    p2node cur = NULL;
     Footbolist footbolist;
     if (n > 0) {
         footbolist = SetFootbolist();
         n--;
-        cur = new tnode;
+        cur = new t2node;
         cur->footbolist = footbolist;
         cur->next = head;
         head = cur;
@@ -112,26 +112,26 @@ void formLIFO_2(int n, pnode* p, pnode head = NULL) {
 
 /////////////////////////////////////////////////////////////////////
 
-pnode formFIFO_1(int n, pnode head = NULL, pnode* cur = NULL) {
+p2node formFIFO_1(int n, p2node head = NULL, p2node* cur = NULL) {
     if (head == NULL || cur == NULL) cur = &head;
     Footbolist footbolist;
     if (n > 0) {
         footbolist = SetFootbolist();
         n--;
-        *cur = new tnode;
+        *cur = new t2node;
         (*cur)->footbolist = footbolist;
         cur = &(*cur)->next;
         return formFIFO_1(n, head, cur);
     }
     return head;
 }
-void formFIFO_2(int n, pnode* p, pnode head = NULL, pnode* cur = NULL) {
+void formFIFO_2(int n, p2node* p, p2node head = NULL, p2node* cur = NULL) {
     if (head == NULL || cur == NULL) cur = &head;
     Footbolist footbolist;
     if (n > 0) {
         footbolist = SetFootbolist();
         n--;
-        *cur = new tnode;
+        *cur = new t2node;
         (*cur)->footbolist = footbolist;
         cur = &(*cur)->next;
         formFIFO_2(n, p, head, cur);
@@ -140,7 +140,7 @@ void formFIFO_2(int n, pnode* p, pnode head = NULL, pnode* cur = NULL) {
 }
 
 /////////////////////////////////////////////////////////////////////
-bool deleteNode(pnode* head, pnode p, pnode cur = NULL) {
+bool deleteNode(p2node* head, p2node p, p2node cur = NULL) {
     if (cur == NULL) {
         cur = *head;
         if (*head == p) {
@@ -165,12 +165,12 @@ bool deleteNode(pnode* head, pnode p, pnode cur = NULL) {
     }
     return false;
 }
-bool insertBefore(pnode* head, pnode p, Footbolist f, pnode cur = NULL) {
+bool insertBefore(p2node* head, p2node p, Footbolist f, p2node cur = NULL) {
     if (cur == NULL) {
         cur = *head;
         if (cur == p) {
             if (p == NULL) return false;
-            *head = new tnode;
+            *head = new t2node;
             (*head)->footbolist = f;
             (*head)->next = p;
             return true;
@@ -178,7 +178,7 @@ bool insertBefore(pnode* head, pnode p, Footbolist f, pnode cur = NULL) {
     }
     if (cur->next != NULL) {
         if (cur->next == p) {
-            cur->next = new tnode;
+            cur->next = new t2node;
             cur->next->footbolist = f;
             cur->next->next = p;
             return true;
@@ -187,15 +187,15 @@ bool insertBefore(pnode* head, pnode p, Footbolist f, pnode cur = NULL) {
     }
     return false;
 }
-bool insertAfter(pnode* head, pnode p, Footbolist f, pnode cur = NULL) {
+bool insertAfter(p2node* head, p2node p, Footbolist f, p2node cur = NULL) {
     if (cur == NULL) {
-        pnode cur = *head;
+        p2node cur = *head;
         if (p == NULL) return false;
     }
     if (cur != NULL) {
         if (cur == p) {
             cur = cur->next;
-            p->next = new tnode;
+            p->next = new t2node;
             p->next->footbolist = f;
             p->next->next = cur;
             return true;
@@ -206,7 +206,7 @@ bool insertAfter(pnode* head, pnode p, Footbolist f, pnode cur = NULL) {
 }
 /////////////////////////////////////////////////////////////////////
 
-void free(pnode p) {
+void free(p2node p) {
     if (p != NULL) {
         free(p->next);
         delete p;
@@ -221,7 +221,7 @@ bool SameFootbolist(Footbolist footbolist1, Footbolist footbolist2) {
         (&footbolist1)->games_count == (&footbolist2)->games_count &&
         (&footbolist1)->goal_count == (&footbolist2)->goal_count;
 }
-pnode FindFootbolist(pnode p, Footbolist footbolist0) {
+p2node FindFootbolist(p2node p, Footbolist footbolist0) {
     if (p != NULL) {
         if (SameFootbolist(p->footbolist, footbolist0)) {
             return p;
@@ -233,7 +233,7 @@ pnode FindFootbolist(pnode p, Footbolist footbolist0) {
 
 /////////////////////////////////////////////////////////////////////
 
-void PrintFootbolist(pnode footbolist) {
+void PrintFootbolist(p2node footbolist) {
     cout << "surname: " << footbolist->footbolist.surname
         << " role: ";
     OutputRole(footbolist->footbolist.role);
@@ -242,24 +242,24 @@ void PrintFootbolist(pnode footbolist) {
         << footbolist->footbolist.games_count <<
         " goal count: " << footbolist->footbolist.goal_count << endl;
 }
-void PrintAll(pnode footbolist) {
+void PrintAll(p2node footbolist) {
     PrintFootbolist(footbolist);
     if (footbolist->next != NULL) PrintAll(footbolist->next);
 }
 
 /////////////////////////////////////////////////////////////////////
 
-pnode BestForward(pnode footbolist, pnode bestForward) {
+p2node BestForward(p2node footbolist, p2node bestForward) {
     if (1.0f * footbolist->footbolist.goal_count / footbolist->footbolist.games_count >
         1.0f * bestForward->footbolist.goal_count / bestForward->footbolist.games_count)
         bestForward = footbolist;
     if (footbolist->next == NULL) return bestForward;
     else return BestForward(footbolist->next, bestForward);
 }
-bool isLessThanFiveGames(pnode footbolist) {
+bool isLessThanFiveGames(p2node footbolist) {
     return footbolist->footbolist.games_count < 5;
 }
-void LessThanFiveGames(pnode footbolist) {
+void LessThanFiveGames(p2node footbolist) {
     if (isLessThanFiveGames(footbolist))
         PrintFootbolist(footbolist);
     if (footbolist->next != NULL) LessThanFiveGames(footbolist->next);
@@ -280,15 +280,15 @@ bool isSorted(Footbolist f1, Footbolist f2) {
     return true;
 }
 
-void insertSorted(pnode& cur, Footbolist footbolist) {
+void insertSorted(p2node& cur, Footbolist footbolist) {
     if (cur == NULL) {
-        cur = new tnode;
+        cur = new t2node;
         cur->footbolist = footbolist;
         cur->next = NULL;
     }
     else {
         if (isSorted(footbolist, cur->footbolist)) {
-            pnode nevv = new tnode;
+            p2node nevv = new t2node;
             nevv->footbolist = cur->footbolist;
             nevv->next = cur->next;
             cur->footbolist = footbolist;
@@ -298,7 +298,7 @@ void insertSorted(pnode& cur, Footbolist footbolist) {
     }
 }
 
-pnode formSorted(int n, pnode head = NULL) {
+p2node formSorted(int n, p2node head = NULL) {
     if (n > 0) {
         Footbolist footbolist = SetFootbolist();
         insertSorted(head, footbolist);
@@ -310,7 +310,7 @@ pnode formSorted(int n, pnode head = NULL) {
 int main()
 {
     int n = 0;
-    pnode footbolist = NULL;
+    p2node footbolist = NULL;
     int command = 0;
     while (true) {
         cout << "0 for help" << endl;
