@@ -267,6 +267,48 @@ void LessThanFiveGames(pnode footbolist) {
 
 /////////////////////////////////////////////////////////////////////
 
+bool isSorted(Footbolist f1, Footbolist f2) {
+    if (f1.role > f2.role) return false;
+    else if (f1.role == f2.role && f1.surname > f2.surname) return false;
+    else if (f1.role == f2.role && f1.surname == f2.surname 
+        && f1.age > f2.age) return false;
+    else if (f1.role == f2.role && f1.surname == f2.surname
+        && f1.age == f2.age && f1.games_count > f2.games_count) return false;
+    else if (f1.role == f2.role && f1.surname == f2.surname
+        && f1.age == f2.age && f1.games_count == f2.games_count
+        && f1.goal_count > f2.goal_count) return false;
+    return true;
+}
+
+void insertSorted(pnode& cur, Footbolist footbolist) {
+    if (cur == NULL) {
+        cur = new tnode;
+        cur->footbolist = footbolist;
+        cur->next = NULL;
+    }
+    else {
+        if (isSorted(footbolist, cur->footbolist)) {
+            pnode nevv = new tnode;
+            nevv->footbolist = cur->footbolist;
+            nevv->next = cur->next;
+            cur->footbolist = footbolist;
+            cur->next = nevv;
+        }
+        else insertSorted(cur->next, footbolist);
+    }
+}
+
+pnode formSorted(int n, pnode head = NULL) {
+    if (n > 0) {
+        Footbolist footbolist = SetFootbolist();
+        insertSorted(head, footbolist);
+        return formSorted(n - 1, head);
+    }
+    return head;
+}
+
+/////////////////////////////////////////////////////////////////////
+
 int main()
 {
     int n = 0;
@@ -287,12 +329,13 @@ int main()
                     cout << "n must be bigger than 0" << endl;
                     continue;
                 }
-                cout << "1 - LIFO_1; 2 - LIFO_2; 3 - FIFO_1; 4 - FIFO_2" << endl;
+                cout << "1 - LIFO_1; 2 - LIFO_2; 3 - FIFO_1; 4 - FIFO_2; 5 - sorted" << endl;
                 cin >> command;
                 if (command == 1) footbolist = formLIFO_1(n);
                 else if (command == 2) formLIFO_2(n, &footbolist);
                 else if (command == 3) footbolist = formFIFO_1(n);
                 else if (command == 4) formFIFO_2(n, &footbolist);
+                else if (command == 5) footbolist = formSorted(n);
                 else cout << "Unknown command" << endl;
             }
             else if (command == 2) {
@@ -304,14 +347,15 @@ int main()
                         break;
                     }
                     cin >> command;
-                    if (command == 0) cout << "0 - help\n1 - find best forward\n2 - show all less than 5 games footbolist\n3 - remove footbolist\n4 - add footbolist before other\n5 - add footbolist after other\n6 - print all\n7 - go back" << endl;
+                    if (command == 0) cout << "0 - help\n1 - find best forward\n2 - show all less than 5 games footbolist\n3 - remove footbolist\n4 - add footbolist before other\n5 - add footbolist after other\n6 - add footbolist in order(sorted list)\n7 - print all\n8 - go back" << endl;
                     else if (command == 1) PrintFootbolist(BestForward(footbolist, footbolist));
                     else if (command == 2) LessThanFiveGames(footbolist);
                     else if (command == 3) if (!deleteNode(&footbolist, FindFootbolist(footbolist, SetFootbolist()))) cout << "Error!Requested footbolist can't be found" << endl; else {cout << "Footbolist was successfully deleted" << endl;}
                     else if (command == 4) if (!insertBefore(&footbolist, FindFootbolist(footbolist, SetFootbolist()), SetOtherFootbolist())) cout << "Error!Requested footbolist can't be found" << endl; else {cout << "Footbolist was successfully inserted" << endl;}
                     else if (command == 5) if (!insertAfter(&footbolist, FindFootbolist(footbolist, SetFootbolist()), SetOtherFootbolist())) cout << "Error!Requested footbolist can't be found" << endl; else{cout << "Footbolist was successfully inserted" << endl;}
-                    else if (command == 6) PrintAll(footbolist);
-                    else if (command == 7) break;
+                    else if (command == 6) insertSorted(footbolist, SetFootbolist());
+                    else if (command == 7) PrintAll(footbolist);
+                    else if (command == 8) break;
                     else cout << "Unknown command" << endl;
                 }
                 
