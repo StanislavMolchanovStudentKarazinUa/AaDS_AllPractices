@@ -153,7 +153,7 @@ bool deleteNode(pnode* head, pnode p, pnode cur = NULL) {
                 return true;
             }
             *head = (*head)->next;
-            delete cur->next;
+            delete cur;
             return true;
         }
     }
@@ -227,7 +227,7 @@ pnode FindFootbolist(pnode p, Footbolist footbolist0) {
         if (SameFootbolist(p->footbolist, footbolist0)) {
             return p;
         }
-        FindFootbolist(p->next, footbolist0);
+        return FindFootbolist(p->next, footbolist0);
     }
     return NULL;
 }
