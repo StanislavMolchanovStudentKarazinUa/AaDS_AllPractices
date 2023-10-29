@@ -56,6 +56,14 @@ void displayLRT(ptree tree)             //зворотній обхід
         cout << tree->info << " ";
     }
 }
+int amountOfEqual(ptree tree, int info) {
+    if (tree == NULL) return 0;
+    else if (tree->info == info)
+        return amountOfEqual(tree->left, info) +
+        amountOfEqual(tree->right, info) + 1;
+    else return amountOfEqual(tree->left, info) +
+        amountOfEqual(tree->right, info);
+}
 
 int main(){
 
