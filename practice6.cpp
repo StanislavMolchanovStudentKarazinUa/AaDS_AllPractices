@@ -29,6 +29,33 @@ void freeTree(ptree t) {
         delete t;
     }
 }
+void displayTLR(ptree tree)             //прямий обхід
+{
+    if (tree != NULL)
+    {
+        cout << tree->info << " ";
+        displayTLR(tree->left);
+        displayTLR(tree->right);
+    }
+}
+void displayLTR(ptree tree)             //симетричний обхід
+{
+    if (tree != NULL)
+    {
+        displayLTR(tree->left);
+        cout << tree->info << " ";
+        displayLTR(tree->right);
+    }
+}
+void displayLRT(ptree tree)             //зворотній обхід
+{
+    if (tree != NULL)
+    {
+        displayLRT(tree->left);
+        displayLRT(tree->right);
+        cout << tree->info << " ";
+    }
+}
 
 int main(){
 
