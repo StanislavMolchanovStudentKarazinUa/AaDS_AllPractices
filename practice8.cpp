@@ -34,7 +34,7 @@ ptree_ae FormAETree(string ae, int* i = NULL) {
     return tae;
 }
 
-void displayTLR_AE(ptree_ae ae_tree)             //прямий обхід
+void displayTLR_AE(ptree_ae ae_tree)
 {
     if (ae_tree != NULL)
     {
@@ -43,7 +43,7 @@ void displayTLR_AE(ptree_ae ae_tree)             //прямий обхід
         displayTLR_AE(ae_tree->right);
     }
 }
-void displayLTR_AE(ptree_ae ae_tree)             //симетричний обхід
+void displayLTR_AE(ptree_ae ae_tree)
 {
     if (ae_tree != NULL)
     {
@@ -72,110 +72,6 @@ void displayLTR_AE(ptree_ae ae_tree)             //симетричний обхід
 }
 
 //////////////////////////////////////////////////
-/*
-void insertInSearchTree(ptree* tree, int info)
-{
-    if (*tree == NULL) { // якщо дерево порожнє, створюємо корінь
-        *tree = new t_tree; // або дійшли до листа (знайшли місце)
-        (*tree)->info = info;
-    }
-    else {
-        if (info < (*tree)->info)
-            insertInSearchTree(&((*tree)->left), info);
-        else
-            insertInSearchTree(&((*tree)->right), info);
-    }
-}
-
-bool deleteFromSearchTree(ptree* tree, int info)
-{
-    if (*tree == NULL) return false;
-    else if ((*tree)->info == info) {
-        if ((*tree)->left == NULL) {
-            if ((*tree)->right == NULL) {
-                delete* tree;
-                *tree = NULL;
-                return true;
-            }
-            else {
-                ptree tree_ = (*tree)->right;
-                (*tree)->info = (*tree)->right->info;
-                (*tree)->left = (*tree)->right->left;
-                (*tree)->right = (*tree)->right->right;
-                delete tree_;
-                return true;
-            }
-        }
-        else {
-            if ((*tree)->right == NULL) {
-                ptree tree_ = (*tree)->left;
-                (*tree)->info = tree_->info;
-                (*tree)->left = tree_->left;
-                (*tree)->right = tree_->right;
-                delete tree_;
-                return true;
-            }
-            else {
-                ptree* tree_ = &(*tree)->left;
-                while ((*tree_)->right != NULL) tree_ = &(*tree_)->right;
-                (*tree)->info = (*tree_)->info;
-                return deleteFromSearchTree(tree_, (*tree_)->info);
-            }
-        }
-    }
-    else {
-        if ((*tree)->left == NULL && (*tree)->right == NULL) return false;
-        else {
-            if (deleteFromSearchTree(&((*tree)->left), info)) return true;
-            else if (deleteFromSearchTree(&((*tree)->right), info)) return true;
-            else return false;
-        }
-    }
-    /*
-      якщо дерево порожнє, або ми спустилися до листа
-      (*tree == NULL), то такого елемента info в дереві немає
-
-      рекурсивно «спускаючись», шукаємо елемент info
-
-      перевіряємо, скільки в нього потомків :
-        якщо 0, звільняємо пам’ять,
-        якщо 1, – замінюємо на нього та звільняємо пам’ять
-        якщо 2 потомки, -реалізуємо один з попередніх
-}
-
-ptree formIdeallyBalanced(int n) // n – загальна кількість вузлів
-{
-    ptree tree = NULL;
-    if (n <= 0) return NULL;
-    for (int i = 1; i <= n; i++) {
-        cout << "Student number " << i << ":\n";
-        int info;
-        cin >> info;
-        insertInSearchTree(&tree, info);
-    }
-    return tree;
-}
-
-void freeTree(ptree t) {
-    if (t != NULL) {
-        freeTree(t->left);
-        freeTree(t->right);
-        delete t;
-    }
-}
-
-void displayLTR(ptree tree)             //симетричний обхід
-{
-    if (tree != NULL)
-    {
-        displayLTR(tree->left);
-        cout << tree->info << endl;
-        displayLTR(tree->right);
-    }
-}
-*/
-
-//////////////////////////////////////////////////
 
 int main()
 {
@@ -187,26 +83,4 @@ int main()
     cout << endl;
     displayLTR_AE(ae_tree);
     cout << endl;
-    /*
-    int command = 0;
-    cout << "Enter command (, any other key - exit): ";
-    while (true) {
-        cin >> command;
-        if (command == 1) {
-
-        }
-        else if (command == 2) {
-
-        }
-        else if (command == 3) {
-
-        }
-        else if (command == 4) {
-            
-        }
-        else break;
-        cout << "Enter command (): ";
-    }
-    */
-    //freeTree(tree);
 }
