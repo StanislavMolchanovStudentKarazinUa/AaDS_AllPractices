@@ -10,10 +10,10 @@ class Queue {
 
 public:
     Queue(int max_size = MAX_QUEUE_SIZE);
-    void push_back(int item);   // додати елемент item в к≥нець черги
-    int pop_front();            // вит€гнути елемент з початку черги
-    int back();                 // отримати елемент у хвост≥ черги (останн≥й)
-    int front();                // отримати елемент у голов≥ черги (перший)
+    void push_back(int item);
+    int pop_front();
+    int back();
+    int front();
     ~Queue();
 };
 
