@@ -75,8 +75,8 @@ typedef t_tree* ptree;
 
 void insertInSearchTree(ptree* tree, Student student)
 {
-    if (*tree == NULL) { // якщо дерево порожнє, створюємо корінь
-        *tree = new t_tree; // або дійшли до листа (знайшли місце)
+    if (*tree == NULL) {
+        *tree = new t_tree;
         (*tree)->student = student;
     }
     else {
@@ -131,20 +131,9 @@ bool deleteFromSearchTree(ptree* tree, Student student)
             else return false;
         }
     }
-    /*
-      якщо дерево порожнє, або ми спустилися до листа
-      (*tree == NULL), то такого елемента info в дереві немає
-
-      рекурсивно «спускаючись», шукаємо елемент info
-
-      перевіряємо, скільки в нього потомків :
-        якщо 0, звільняємо пам’ять,
-        якщо 1, – замінюємо на нього та звільняємо пам’ять
-        якщо 2 потомки, -реалізуємо один з попередніх
-    */
 }
 
-ptree formIdeallyBalanced(int n) // n – загальна кількість вузлів
+ptree formIdeallyBalanced(int n)
 {
     ptree tree = NULL;
     if (n <= 0) return NULL;
@@ -163,7 +152,7 @@ void freeTree(ptree t) {
     }
 }
 
-void displayLTR(ptree tree)             //симетричний обхід
+void displayLTR(ptree tree)
 {
     if (tree != NULL)
     {
@@ -174,7 +163,7 @@ void displayLTR(ptree tree)             //симетричний обхід
     }
 }
 
-void displayStudentsLowerGradeThan(ptree tree, double successRate) { //функція, яка виводить інформацію про студентів, які мають бал менший ніж вказаний у параметрі
+void displayStudentsLowerGradeThan(ptree tree, double successRate) { //a function that displays information about students who have a score lower than specified in the parameter
     if (tree != NULL)
     {
         if (tree->student.successRate < successRate) {
